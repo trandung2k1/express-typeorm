@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "target": "ES5",
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "rootDir": "./src",
+        "outDir": "dist",
+        "allowJs": true,
+        "alwaysStrict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noImplicitAny": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "typeRoots": ["./src/types", "./node_modules/@types"]
+    },
+    "lib": ["es2015"],
+    "exclude": ["node_modules", "dist", "build"],
+    "include": ["src/**/*.ts"]
+}
