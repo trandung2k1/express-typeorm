@@ -5,6 +5,7 @@ import { User } from './entities/User.entity';
 import sql from 'mssql';
 import { createDatabase } from 'typeorm-extension';
 import { sqlConfig, optionsNotExits } from './config';
+import path from 'path';
 const app: Application = express();
 const port = parseInt(process.env.PORT as string) || 4000;
 
@@ -28,6 +29,20 @@ app.get('/', async (req: Request, res: Response) => {
         return res.status(500).json(error);
     }
 });
+app.get('/backup', async (req: Request, res: Response) => {
+    try {
+        // const users = await AppDataSource.manager.query('SELECT * FROM User');
+        const time = new Date().getTime();
+        const path = `'D:\\express-typeorm\\backups\\${time + '.bak'}'`;
+        await AppDataSource.manager.query(
+            `BACKUP DATABASE haha TO DISK = ${path}  WITH DIFFERENTIAL`,
+        );
+        return res.json({ msg: 'Backup database successfully!' });
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
+
 app.listen(port, () => {
     initDatabase().then(() => {
         AppDataSource.initialize()
